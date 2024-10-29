@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.gtech"
-version = "1.0-SNAPSHOT"
+version = "0.0.1"
 
 repositories {
     mavenCentral()
@@ -27,12 +27,23 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "MainKt"
-
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "KSerialUi"
-            packageVersion = "1.0.0"
+            modules("java.compiler", "java.instrument" , "java.sql", "jdk.unsupported")
+            modules("java.naming", "java.management", "java.xml", "jdk.management")
+            buildTypes {
+                release {
+                    proguard {
+                        configurationFiles.from(project.file("proguard-rules.pro"))
+                        isEnabled.set(false)
+                        obfuscate.set(false)
+                        optimize.set(true)
+                    }
+                }
+            }
+            targetFormats(TargetFormat.Msi)
+            mainClass = "MainKt"
+            packageName = "KSerial"
+            packageVersion = version.toString()
         }
     }
 }

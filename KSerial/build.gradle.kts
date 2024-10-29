@@ -1,12 +1,14 @@
 plugins {
     kotlin("jvm")
+    id("maven-publish")
 }
 
 group = "com.gtech"
-version = "1.0-SNAPSHOT"
+version = "0.0.1"
 
 repositories {
     mavenCentral()
+    maven("https://jitpack.io")
 }
 
 dependencies {
@@ -18,6 +20,22 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
     jvmToolchain(17)
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+            groupId = project.group.toString()
+            artifactId = project.name
+            version = version
+        }
+    }
+}
+
+tasks.named("publishToMavenLocal") {
+    dependsOn("assemble")
 }

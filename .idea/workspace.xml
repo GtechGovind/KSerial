@@ -118,6 +118,7 @@
     "Gradle.KSerialUi [packageReleaseDistributionForCurrentOS].executor": "Run",
     "Gradle.KSerialUi [packageReleaseMsi].executor": "Run",
     "Gradle.KSerialUi [publishToMavenLocal].executor": "Run",
+    "Gradle.KSerialUi:KSerial [build].executor": "Run",
     "Gradle.KSerialUi:KSerial [jar].executor": "Run",
     "Gradle.KSerialUi:KSerial [kotlinSourcesJar].executor": "Run",
     "Gradle.Preview: MainKt.MainScreen.executor": "Run",
@@ -138,51 +139,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.KSerialUi [publishToMavenLocal]">
-    <configuration name="KSerialUi [packageReleaseDistributionForCurrentOS]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="packageReleaseDistributionForCurrentOS" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="KSerialUi [packageReleaseMsi]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="packageReleaseMsi" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Gradle.KSerialUi:KSerial [clean]">
     <configuration name="KSerialUi [publishToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -195,6 +152,50 @@
         <option name="taskNames">
           <list>
             <option value="publishToMavenLocal" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="KSerialUi:KSerial [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/KSerial" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="KSerialUi:KSerial [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/KSerial" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -251,11 +252,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.KSerialUi [publishToMavenLocal]" />
-        <item itemvalue="Gradle.KSerialUi:KSerial [jar]" />
+        <item itemvalue="Gradle.KSerialUi:KSerial [clean]" />
         <item itemvalue="Gradle.KSerialUi:KSerial [kotlinSourcesJar]" />
-        <item itemvalue="Gradle.KSerialUi [packageReleaseMsi]" />
-        <item itemvalue="Gradle.KSerialUi [packageReleaseDistributionForCurrentOS]" />
+        <item itemvalue="Gradle.KSerialUi [publishToMavenLocal]" />
+        <item itemvalue="Gradle.KSerialUi:KSerial [build]" />
+        <item itemvalue="Gradle.KSerialUi:KSerial [jar]" />
       </list>
     </recent_temporary>
   </component>
@@ -277,7 +278,7 @@
       <updated>1729842066951</updated>
       <workItem from="1729842067987" duration="1828000" />
       <workItem from="1729846807838" duration="16367000" />
-      <workItem from="1730097704669" duration="37361000" />
+      <workItem from="1730097704669" duration="37737000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -295,7 +296,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730198453688</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Initial Commit">
+      <option name="closed" value="true" />
+      <created>1730198833216</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1730198833216</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

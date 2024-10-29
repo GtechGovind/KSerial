@@ -21,16 +21,6 @@ tasks.test {
     useJUnitPlatform()
 }
 
-kotlin {
-    jvmToolchain(17)
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
-
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
@@ -40,8 +30,4 @@ publishing {
             version = version
         }
     }
-}
-
-tasks.named("publishToMavenLocal") {
-    dependsOn("assemble")
 }

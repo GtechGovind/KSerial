@@ -5,6 +5,7 @@ import androidx.compose.runtime.setValue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainViewModel {
 
@@ -42,9 +43,8 @@ class MainViewModel {
                 selectedPort
             ) {
                 logs.add(it)
-            }
-                .enableAutoReconnect()
-                .build()
+            }.enableAutoReconnect()
+            .build()
             kSerial?.start()
         }
     }
@@ -87,6 +87,12 @@ class MainViewModel {
         }
     }
 
+    fun onDestroy() {
+        runBlocking {
+            disconnect()
+        }
+    }
+
     data class Command(
         val type: Type,
         val data: String
@@ -107,8 +113,4 @@ class MainViewModel {
         }
     }
 
-}
-
-fun main() {
-    println(byteArrayOf(0xAA.toByte()).contentToString())
 }

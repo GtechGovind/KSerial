@@ -15,6 +15,7 @@ class MainViewModel {
     var logs = mutableStateListOf<String>()
     var commands = mutableStateListOf<Command>()
     var selectedPort by mutableStateOf("")
+    var isDataString by mutableStateOf(false)
 
     init {
         refreshPorts()
@@ -55,19 +56,35 @@ class MainViewModel {
     }
 
     fun sendCommand(data: String) = scope.launch {
-        commands.add(
-            Command(
-                Command.Type.REQUEST,
-                data
+        if (isDataString) {
+            commands.add(
+                Command(
+                    Command.Type.REQUEST,
+                    data
+                )
             )
-        )
-        val response = kSerial?.sendReceive(data) ?: ""
-        commands.add(
-            Command(
-                Command.Type.RESPONSE,
-                response
+            val response = kSerial?.sendReceive(data.hexToBytes())
+            commands.add(
+                Command(
+                    Command.Type.RESPONSE,
+                    response?.toHex() ?: ""
+                )
             )
-        )
+        } else {
+            commands.add(
+                Command(
+                    Command.Type.REQUEST,
+                    data
+                )
+            )
+            val response = kSerial?.sendReceive(data) ?: ""
+            commands.add(
+                Command(
+                    Command.Type.RESPONSE,
+                    response
+                )
+            )
+        }
     }
 
     data class Command(
@@ -90,4 +107,8 @@ class MainViewModel {
         }
     }
 
+}
+
+fun main() {
+    println(byteArrayOf(0xAA.toByte()).contentToString())
 }

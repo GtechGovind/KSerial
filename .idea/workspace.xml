@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fdfdb33a-a37a-469b-b3e7-f2d02ca628c7" name="Changes" comment="Initial Commit">
+      <change afterPath="$PROJECT_DIR$/.idea/remote-targets.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KSerial/src/main/kotlin/Utils.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KSerial/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/KSerial/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSerial/src/main/kotlin/KSerial.kt" beforeDir="false" afterPath="$PROJECT_DIR$/KSerial/src/main/kotlin/KSerial.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/MainViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/MainViewModel.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,20 +42,13 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="KSerialUi" type="f1a62948:ProjectNode" />
-                <item name="KSerial" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="KSerialUi" type="f1a62948:ProjectNode" />
-                <item name="KSerial" type="2d1252cf:ModuleNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="KSerialUi" type="f1a62948:ProjectNode" />
-                <item name="KSerial" type="2d1252cf:ModuleNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
+                <item name="compose desktop" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -65,24 +63,25 @@
         <option value="Kotlin Enum" />
         <option value="Kotlin Interface" />
         <option value="Kotlin Class" />
+        <option value="Kotlin File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "GtechGovind"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;GtechGovind&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/GtechGovind/KSerial.git",
-    "accountId": "f10e86c1-cab7-4447-8092-ec42b69b1b8c"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/GtechGovind/KSerial.git&quot;,
+    &quot;accountId&quot;: &quot;f10e86c1-cab7-4447-8092-ec42b69b1b8c&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fazecast/jSerialComm/2.11.0/5a6d64af694109d62b6e982ed20dae78f4c5b0ce/jSerialComm-2.11.0-sources.jar!/com/fazecast/jSerialComm/SerialPort.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fazecast/jSerialComm/2.9.2/7b089d4e3636165b195df0d2f3c44ab37e374c0f/jSerialComm-2.9.2.jar!/com/fazecast/jSerialComm/SerialPort.class" root0="SKIP_INSPECTION" />
@@ -110,37 +109,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Gradle.Build KSerialUi.executor": "Run",
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.KSerialUi [packageReleaseDistributionForCurrentOS].executor": "Run",
-    "Gradle.KSerialUi [packageReleaseMsi].executor": "Run",
-    "Gradle.KSerialUi [publishToMavenLocal].executor": "Run",
-    "Gradle.KSerialUi:KSerial [build].executor": "Run",
-    "Gradle.KSerialUi:KSerial [jar].executor": "Run",
-    "Gradle.KSerialUi:KSerial [kotlinSourcesJar].executor": "Run",
-    "Gradle.Preview: MainKt.MainScreen.executor": "Run",
-    "Gradle.desktop.executor": "Run",
-    "Kotlin.MainKt.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "corretto-17",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/RM/MISC",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Gradle.Build KSerialUi.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.KSerialUi [packageDistributionForCurrentOS].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.KSerialUi [packageReleaseDistributionForCurrentOS].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.KSerialUi [packageReleaseMsi].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.KSerialUi [packageReleaseUberJarForCurrentOS].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.KSerialUi [publishToMavenLocal].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.KSerialUi:KSerial [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.KSerialUi:KSerial [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.KSerialUi:KSerial [jar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.KSerialUi:KSerial [kotlinSourcesJar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Preview: MainKt.MainScreen.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.desktop remote.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.desktop.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.MainKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.MainViewModelKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.OldGateKt.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-17&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/gtech/Desktop/Projects/UI/KSerialUi/src/main/kotlin&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Gradle.KSerialUi:KSerial [clean]">
-    <configuration name="KSerialUi [publishToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gtech\Desktop\Projects\UI\KSerialUi\src\main\kotlin" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.desktop">
+    <configuration name="KSerialUi [packageDistributionForCurrentOS]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -151,7 +161,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="publishToMavenLocal" />
+            <option value="packageDistributionForCurrentOS" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -162,10 +172,10 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="KSerialUi:KSerial [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="KSerialUi [packageReleaseUberJarForCurrentOS]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/KSerial" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
         <option name="taskDescriptions">
@@ -173,7 +183,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="build" />
+            <option value="packageReleaseUberJarForCurrentOS" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -184,21 +194,22 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="KSerialUi:KSerial [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="desktop remote" type="GradleRunConfiguration" factoryName="Gradle">
+      <target name="pi@10.14.3.159:22" />
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/KSerial" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="clean" />
+            <option value="run" />
           </list>
         </option>
-        <option name="vmOptions" />
+        <option name="vmOptions" value="" />
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
@@ -206,57 +217,34 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="KSerialUi:KSerial [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/KSerial" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="jar" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
+    <configuration name="MainViewModelKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainViewModelKt" />
+      <module name="KSerialUi.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="KSerialUi:KSerial [kotlinSourcesJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/KSerial" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="kotlinSourcesJar" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
+    <configuration name="OldGateKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="OldGateKt" />
+      <module name="KSerialUi.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
+    <list>
+      <item itemvalue="Gradle.desktop" />
+      <item itemvalue="Gradle.desktop remote" />
+      <item itemvalue="Gradle.KSerialUi [packageDistributionForCurrentOS]" />
+      <item itemvalue="Gradle.KSerialUi [packageReleaseUberJarForCurrentOS]" />
+      <item itemvalue="Kotlin.MainViewModelKt" />
+      <item itemvalue="Kotlin.OldGateKt" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.KSerialUi:KSerial [clean]" />
-        <item itemvalue="Gradle.KSerialUi:KSerial [kotlinSourcesJar]" />
-        <item itemvalue="Gradle.KSerialUi [publishToMavenLocal]" />
-        <item itemvalue="Gradle.KSerialUi:KSerial [build]" />
-        <item itemvalue="Gradle.KSerialUi:KSerial [jar]" />
+        <item itemvalue="Gradle.KSerialUi [packageReleaseUberJarForCurrentOS]" />
+        <item itemvalue="Kotlin.OldGateKt" />
+        <item itemvalue="Kotlin.MainViewModelKt" />
+        <item itemvalue="Gradle.KSerialUi [packageDistributionForCurrentOS]" />
       </list>
     </recent_temporary>
   </component>
@@ -278,7 +266,8 @@
       <updated>1729842066951</updated>
       <workItem from="1729842067987" duration="1828000" />
       <workItem from="1729846807838" duration="16367000" />
-      <workItem from="1730097704669" duration="37737000" />
+      <workItem from="1730097704669" duration="46956000" />
+      <workItem from="1730282660427" duration="3537000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -304,7 +293,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730198833216</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Initial Commit">
+      <option name="closed" value="true" />
+      <created>1730199362115</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1730199362115</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

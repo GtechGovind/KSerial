@@ -16,7 +16,6 @@ import androidx.compose.ui.window.application
 
 var viewModel = MainViewModel()
 
-
 @Composable
 private fun ConnectionView(modifier: Modifier) {
     OutlinedCard(
@@ -120,8 +119,7 @@ private fun SendCommandView(modifier: Modifier) {
         ElevatedCard(
             modifier = Modifier
                 .weight(1f)
-                .padding(bottom = 16.dp)
-                .padding(horizontal = 16.dp),
+                .padding(16.dp),
             shape = MaterialTheme.shapes.small
         ) {
             OutlinedTextField(
@@ -136,16 +134,28 @@ private fun SendCommandView(modifier: Modifier) {
                     Text("Enter Something ...")
                 },
             )
+            ElevatedFilterChip(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                selected = viewModel.isDataString,
+                label = {
+                    Text("HEX DATA")
+                },
+                onClick = {
+                    viewModel.isDataString = !viewModel.isDataString
+                }
+            )
         }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(16.dp)
         ) {
             Button(
                 modifier = Modifier.weight(1f),
                 onClick = {
-                    if(command.text.isNotEmpty()) {
+                    if (command.text.isNotEmpty()) {
                         viewModel.sendCommand(command.text)
                     } else {
                         viewModel.logs.add("Please enter valid command!")

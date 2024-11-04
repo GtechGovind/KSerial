@@ -2,6 +2,9 @@ import jssc.SerialPort
 import jssc.SerialPortList
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
 /**
  * KSerial is a serial communication utility class providing features like auto-reconnect,
@@ -36,6 +39,7 @@ class KSerial private constructor(
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private val isConnected = MutableStateFlow(false)
     private var serial: SerialPort? = null
+    private val sendReceiveMutex = Mutex()
     private var responseFailureCounter = 0
 
     /**
@@ -60,6 +64,12 @@ class KSerial private constructor(
         responseFailureCounter = 0
         isConnected.value = false
     }
+
+    /**
+     * Exposes the connection status as a StateFlow to observe status changes.
+     * @return A StateFlow<Boolean> representing the connection status.
+     */
+    override fun getConnectionStatusFlow(): StateFlow<Boolean> = isConnected
 
     /**
      * Writes a byte array to the serial port.
@@ -102,15 +112,17 @@ class KSerial private constructor(
      * Delays reading to accommodate device response time.
      */
     override suspend fun sendReceive(request: ByteArray): ByteArray? {
-        return try {
-            ensureConnected()
-            write(request)
-            delay(readDelay)
-            readBytes()
-        } catch (e: Exception) {
-            logger(e.message ?: e.stackTraceToString())
-            responseFailureCounter++
-            null
+        return sendReceiveMutex.withLock {
+            try {
+                ensureConnected()
+                write(request)
+                delay(readDelay)
+                readBytes()
+            } catch (e: Exception) {
+                logger(e.message ?: e.stackTraceToString())
+                responseFailureCounter++
+                null
+            }
         }
     }
 
@@ -119,15 +131,17 @@ class KSerial private constructor(
      * Delays reading to accommodate device response time.
      */
     override suspend fun sendReceive(request: String): String? {
-        return try {
-            ensureConnected()
-            write(request)
-            delay(readDelay)
-            readString()
-        } catch (e: Exception) {
-            logger(e.message ?: e.stackTraceToString())
-            responseFailureCounter++
-            null
+        return sendReceiveMutex.withLock {
+            try {
+                ensureConnected()
+                write(request)
+                delay(readDelay)
+                readString()
+            } catch (e: Exception) {
+                logger(e.message ?: e.stackTraceToString())
+                responseFailureCounter++
+                null
+            }
         }
     }
 
@@ -190,6 +204,7 @@ class KSerial private constructor(
     ) = try {
         block()
     } catch (e: Exception) {
+        isConnected.value = false
         logger(e.message ?: e.stackTraceToString())
         null
     }

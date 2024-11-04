@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -44,8 +45,12 @@ class MainViewModel {
             ) {
                 logs.add(it)
             }.enableAutoReconnect()
-            .build()
+                .build()
             kSerial?.start()
+            kSerial?.getConnectionStatusFlow()
+                ?.collectLatest {
+                    logs.add("Connection status: $it")
+                }
         }
     }
 

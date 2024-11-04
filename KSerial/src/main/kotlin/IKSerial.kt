@@ -1,3 +1,5 @@
+import kotlinx.coroutines.flow.StateFlow
+
 /**
  * Interface for serial communication functionality in a structured, asynchronous manner.
  * Provides methods to start and stop communication, read and write data, and handle
@@ -72,5 +74,11 @@ interface IKSerial {
      * @return The response from the device as a byte array, or null if the operation fails.
      */
     suspend fun sendReceive(request: ByteArray): ByteArray?
+
+    /**
+     * Exposes the connection status as a StateFlow to observe status changes.
+     * @return A StateFlow<Boolean> representing the connection status.
+     */
+    fun getConnectionStatusFlow(): StateFlow<Boolean>
 
 }

@@ -1,12 +1,12 @@
+
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.remember
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 
+val viewModel = MainViewModel()
 fun main() = application {
-    val viewModel = remember { MainViewModel() }
     Window(
         onCloseRequest = {
             viewModel.onDestroy()

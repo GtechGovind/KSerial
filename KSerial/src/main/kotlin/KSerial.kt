@@ -85,7 +85,7 @@ class KSerial private constructor(
      */
     override suspend fun readString(): String {
         ensureConnected()
-        return serial?.readHexString() ?: error("Failed to read the from $port")
+        return serial?.readString() ?: error("Failed to read the from $port")
     }
 
     /**

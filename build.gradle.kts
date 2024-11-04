@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.gtech"
-version = "1.0.2"
+version = "1.0.4"
 
 repositories {
     mavenCentral()
@@ -17,7 +17,7 @@ repositories {
 
 dependencies {
 
-    implementation(compose.desktop.linux_arm64) {
+    implementation(compose.desktop.currentOs) {
         exclude("org.jetbrains.compose.material")
     }
     implementation(compose.material3)

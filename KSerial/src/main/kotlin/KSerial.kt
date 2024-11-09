@@ -7,8 +7,21 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
 /**
- * KSerial - A Kotlin-based serial communication wrapper with support for auto-reconnection,
- * concurrency-safe data transmission, and configurable retry handling.
+ * KSerial is a serial communication utility class providing features like auto-reconnect,
+ * configurable retry mechanisms, and support for both string and byte array data exchanges.
+ * This class is designed to be flexible, allowing configuration of parameters through its builder,
+ * and it is coroutine-friendly for non-blocking IO operations.
+ *
+ * @property port The name of the serial port to be connected.
+ * @property baudRate The baud rate for communication.
+ * @property dataBits The data bits for serial configuration.
+ * @property stopBits The stop bits for serial configuration.
+ * @property parity The parity setting for serial configuration.
+ * @property retryDelay Delay before retrying to connect, if auto-reconnect is enabled.
+ * @property readDelay Delay after writing to allow the device to respond before reading.
+ * @property maxFailureCount Maximum number of consecutive failures before reset.
+ * @property logger A logging function for handling message logging.
+ * @property isAutoReconnect Boolean to enable auto-reconnection on failure.
  */
 class KSerial private constructor(
     private val port: String,
@@ -24,194 +37,197 @@ class KSerial private constructor(
 ) : IKSerial {
 
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
-    private val isConnected = MutableStateFlow(false) // Represents the connection status flow
+    private val isConnected = MutableStateFlow(false)
     private var serial: SerialPort? = null
-    private val communication = Mutex() // Ensures thread safety during data transmission
-    private var responseFailureCounter = 0 // Counts consecutive read/write failures
+    private val sendReceiveMutex = Mutex()
+    private var responseFailureCounter = 0
 
     /**
-     * Initializes the connection process. If auto-reconnect is enabled, it triggers autoConnect().
+     * Starts the serial communication by connecting to the port.
+     * If auto-reconnect is enabled, launches auto-connection in a coroutine.
      */
     override fun start() {
         scope.launch {
-            if (isAutoReconnect) autoConnect() else connect()
+            if (isAutoReconnect) autoConnect()
+            else connect()
         }
     }
 
     /**
-     * Terminates the serial connection and stops auto-reconnect attempts.
+     * Stops the serial communication and releases resources.
+     * Cancels the coroutine scope and resets the failure counter.
      */
     override fun stop() {
-        scope.launch { disconnect() }
+        withError { serial?.closePort() }
+        serial = null
+        withError { scope.cancel() }
+        responseFailureCounter = 0
+        isConnected.value = false
     }
 
     /**
-     * Returns a StateFlow representing the current connection status.
+     * Exposes the connection status as a StateFlow to observe status changes.
+     * @return A StateFlow<Boolean> representing the connection status.
      */
     override fun getConnectionStatusFlow(): StateFlow<Boolean> = isConnected
 
     /**
-     * Sends a byte array over the serial connection.
-     * @return True if the data was written successfully, false otherwise.
+     * Writes a byte array to the serial port.
+     * Ensures connection is active before sending data.
      */
     override suspend fun write(bytes: ByteArray): Boolean {
-        return communication.withLock {
+        return sendReceiveMutex.withLock {
             try {
                 ensureConnected()
-                serial?.writeBytes(bytes) ?: false
+                return serial?.writeBytes(bytes) ?: false
             } catch (e: Exception) {
-                handleFailure(e)
+                logger(e.message ?: e.stackTraceToString())
+                responseFailureCounter++
                 false
             }
         }
     }
 
     /**
-     * Sends a string over the serial connection.
-     * @return True if the data was written successfully, false otherwise.
+     * Writes a string to the serial port.
+     * Ensures connection is active before sending data.
      */
     override suspend fun write(data: String): Boolean {
-        return communication.withLock {
+        return sendReceiveMutex.withLock {
             try {
                 ensureConnected()
-                serial?.writeString(data) ?: false
+                return serial?.writeString(data) ?: false
             } catch (e: Exception) {
-                handleFailure(e)
+                logger(e.message ?: e.stackTraceToString())
+                responseFailureCounter++
                 false
             }
         }
     }
 
     /**
-     * Reads data from the serial connection as a string.
-     * @return The data read from the connection, or null if an error occurred.
+     * Reads data as a string from the serial port.
+     * Ensures connection is active before reading.
      */
     override suspend fun readString(): String? {
-        return communication.withLock {
+        return sendReceiveMutex.withLock {
             try {
                 ensureConnected()
-                serial?.readString() ?: throw Exception("Failed to read from $port")
+                return serial?.readString() ?: error("Failed to read from $port")
             } catch (e: Exception) {
-                handleFailure(e)
+                logger(e.message ?: e.stackTraceToString())
+                responseFailureCounter++
                 null
             }
         }
     }
 
     /**
-     * Reads data from the serial connection as a byte array.
-     * @return The byte array read from the connection, or null if an error occurred.
+     * Reads data as a byte array from the serial port.
+     * Ensures connection is active before reading.
      */
     override suspend fun readBytes(): ByteArray? {
-        return communication.withLock {
+        return sendReceiveMutex.withLock {
             try {
                 ensureConnected()
-                serial?.readBytes() ?: throw Exception("Failed to read from $port")
+                return serial?.readBytes() ?: error("Failed to read from $port")
             } catch (e: Exception) {
-                handleFailure(e)
+                logger(e.message ?: e.stackTraceToString())
+                responseFailureCounter++
                 null
             }
         }
     }
 
     /**
-     * Sends a byte array request and waits for a byte array response.
-     * @return The response byte array, or null if the operation failed.
+     * Sends a byte array request to the serial port and waits to receive a byte array response.
+     * Delays reading to accommodate device response time.
      */
     override suspend fun sendReceive(request: ByteArray): ByteArray? {
         ensureConnected()
         write(request)
-        delay(readDelay) // Allows the receiver time to respond
+        delay(readDelay)
         return readBytes()
     }
 
     /**
-     * Sends a string request and waits for a string response.
-     * @return The response string, or null if the operation failed.
+     * Sends a string request to the serial port and waits to receive a string response.
+     * Delays reading to accommodate device response time.
      */
     override suspend fun sendReceive(request: String): String? {
         ensureConnected()
         write(request)
-        delay(readDelay) // Allows the receiver time to respond
+        delay(readDelay)
         return readString()
     }
 
     /**
-     * Ensures the connection is active. Attempts reconnection if the connection is lost
-     * or if failure threshold is exceeded.
+     * Ensures that the serial port connection is active.
+     * Resets the connection if the port is not opened or failure count exceeds the maximum limit.
      */
-    private suspend fun ensureConnected() = communication.withLock {
-        if (serial == null || serial?.isOpened == false || responseFailureCounter >= maxFailureCount) {
-            logger("Connection not active, attempting to reconnect to $port.")
-            disconnect()
-            connect()
-        }
-    }
-
-    /**
-     * Continuously attempts reconnection when the connection is lost, if auto-reconnect is enabled.
-     * Runs on a background coroutine until the connection is successfully re-established.
-     */
-    private suspend fun autoConnect() = coroutineScope {
-        while (isActive) {
-            if (serial == null || !serial!!.isOpened) {
-                logger("Auto-reconnect in progress for $port.")
+    private suspend fun ensureConnected() = withError {
+        withContext(Dispatchers.IO) {
+            if (
+                serial == null ||
+                serial?.isOpened == false ||
+                responseFailureCounter > maxFailureCount
+            ) {
+                logger("Failed to get $port status, resetting the connection!")
+                stop()
                 connect()
             }
-            delay(retryDelay)
         }
     }
 
     /**
-     * Establishes a connection to the serial port with the specified parameters.
+     * Establishes a new connection to the serial port with the specified parameters.
+     * Logs successful connections and sets connection state.
      */
-    private suspend fun connect() = communication.withLock {
-        runCatching {
-            if (isConnected.value) throw IllegalStateException("Already connected to $port.")
-            SerialPort(port).apply {
-                if (!openPort()) throw IllegalStateException("Failed to open port: $port")
-                if (!setParams(baudRate, dataBits, stopBits, parity)) throw IllegalStateException("Failed to set port parameters.")
-                serial = this
-                isConnected.value = true
-                logger("Connected to $port.")
-                responseFailureCounter = 0
+    private fun connect() = withError {
+        if (isConnected.value) error("Already connected to $port.")
+        SerialPort(port).apply {
+            if (!openPort()) error("Failed to connect to $port.")
+            if (!setParams(baudRate, dataBits, stopBits, parity)) error("Failed to set parameters for $port.")
+            serial = this
+            isConnected.value = true
+            logger("Connected to $port.")
+        }
+    }
+
+    /**
+     * Automatically attempts to maintain a connection to the serial port.
+     * Runs on a recurring delay defined by `retryDelay`, checking and re-establishing connection as necessary.
+     */
+    private suspend fun autoConnect() = withError {
+        withContext(Dispatchers.IO) {
+            while (isActive) {
+                logger("Checking if auto reconnect is required for $port!")
+                if (serial == null || serial?.isOpened == false || !isConnected.value) {
+                    logger("Reconnecting from auto reconnect!")
+                    connect()
+                }
+                delay(retryDelay)
             }
-        }.onFailure { e ->
-            logger("Failed to connect to $port: ${e.message}")
-            isConnected.value = false
         }
     }
 
     /**
-     * Closes the current serial connection and resets connection state.
+     * Helper function to handle errors during operations and log messages.
+     * @param block The operation to perform with error handling.
      */
-    private suspend fun disconnect() = communication.withLock {
-        runCatching {
-            serial?.closePort()
-        }.onFailure { e ->
-            logger("Failed to close port $port: ${e.message}")
-        }.also {
-            serial = null
-            isConnected.value = false
-            responseFailureCounter = 0
-        }
-    }
-
-    /**
-     * Handles failures by logging the error, incrementing the failure counter, and
-     * disconnecting if the maximum failure count is reached.
-     */
-    private suspend fun handleFailure(e: Exception) {
-        responseFailureCounter++
-        if (responseFailureCounter >= maxFailureCount) {
-            logger("Maximum failure count reached for $port. Resetting connection.")
-            disconnect()
-        }
+    private inline fun <T> withError(
+        block: () -> T?
+    ) = try {
+        block()
+    } catch (e: Exception) {
+        isConnected.value = false
         logger(e.message ?: e.stackTraceToString())
+        null
     }
 
     /**
-     * Builder for creating a customized instance of KSerial with various configuration options.
+     * Builder class for constructing KSerial instances with customizable parameters.
+     * Provides fluent methods for setting connection and retry configurations.
      */
     class Builder(private val port: String, private val logger: (String) -> Unit) {
         private var baudRate: Int = SerialPort.BAUDRATE_115200
@@ -223,6 +239,7 @@ class KSerial private constructor(
         private var isAutoReconnect: Boolean = true
         private var maxFailureCount: Int = 3
 
+        // Builder methods for setting parameters.
         fun baudRate(baudRate: Int) = apply { this.baudRate = baudRate }
         fun dataBits(dataBits: Int) = apply { this.dataBits = dataBits }
         fun stopBits(stopBits: Int) = apply { this.stopBits = stopBits }
@@ -242,12 +259,12 @@ class KSerial private constructor(
 
     companion object {
         /**
-         * Creates a new KSerial Builder instance for the specified port.
+         * Returns a Builder instance for KSerial construction.
          */
         fun builder(port: String, logger: (String) -> Unit) = Builder(port, logger)
 
         /**
-         * Lists all available serial ports.
+         * Returns an array of available serial ports.
          */
         fun getPorts(): Array<String> = SerialPortList.getPortNames()
     }

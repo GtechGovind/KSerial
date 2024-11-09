@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.gtech"
-version = "2.0.1"
+version = "1.0.6"
 
 repositories {
     mavenCentral()

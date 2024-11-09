@@ -113,7 +113,7 @@ class KSerial private constructor(
         return sendReceiveMutex.withLock {
             try {
                 ensureConnected()
-                return serial?.readString() ?: error("Failed to read from $port")
+                return serial?.readString()
             } catch (e: Exception) {
                 logger(e.message ?: e.stackTraceToString())
                 responseFailureCounter++
@@ -130,7 +130,7 @@ class KSerial private constructor(
         return sendReceiveMutex.withLock {
             try {
                 ensureConnected()
-                return serial?.readBytes() ?: error("Failed to read from $port")
+                return serial?.readBytes()
             } catch (e: Exception) {
                 logger(e.message ?: e.stackTraceToString())
                 responseFailureCounter++

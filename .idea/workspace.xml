@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fdfdb33a-a37a-469b-b3e7-f2d02ca628c7" name="Changes" comment="1. Fixed port is continuously reconnection if there is nothing to read from serial port!" />
+    <list default="true" id="fdfdb33a-a37a-469b-b3e7-f2d02ca628c7" name="Changes" comment="1. Fixed port is continuously reconnection if there is nothing to read from serial port!">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KSerial/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/KSerial/build.gradle.kts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,12 +29,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="KSerialUi" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -291,7 +289,7 @@
       <workItem from="1731142366757" duration="1839000" />
       <workItem from="1731144366614" duration="10000" />
       <workItem from="1731144603758" duration="2038000" />
-      <workItem from="1731146921330" duration="349000" />
+      <workItem from="1731146921330" duration="405000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -397,7 +395,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731147105017</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="1. Fixed port is continuously reconnection if there is nothing to read from serial port!">
+      <option name="closed" value="true" />
+      <created>1731147283060</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1731147283060</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fdfdb33a-a37a-469b-b3e7-f2d02ca628c7" name="Changes" comment="v1.0.4">
+    <list default="true" id="fdfdb33a-a37a-469b-b3e7-f2d02ca628c7" name="Changes" comment="Changelog for KSerial Class&#10;&#10;Version 2.0.0&#10;&#10;1. Auto-Reconnection:&#10;   - Added automatic reconnection with a configurable retry delay. This ensures the connection is re-established if lost, enhancing reliability in unstable environments.&#10;&#10;2. Connection Status Flow:&#10;   - Integrated StateFlow to broadcast real-time connection status, enabling subscribers to react to changes in connection.&#10;&#10;3. Concurrency Safety:&#10;   - Incorporated a Mutex (named communication) to ensure thread-safe access during read and write operations, protecting against concurrency issues.&#10;&#10;4. Failure Handling &amp; Retry Logic:&#10;   - Introduced a configurable maxFailureCount to automatically disconnect after a series of consecutive failures, preventing potential deadlocks.&#10;   - Added a responseFailureCounter to track failures, with an automatic reset upon successful operation.&#10;   - Improved error handling by disconnecting and resetting the connection if the maximum failure threshold is reached.&#10;&#10;5. Enhanced Logging:&#10;   - Expanded logging to provide detailed information about connection status, data transmission, and errors, aiding in debugging and traceability.&#10;&#10;6. Builder Pattern:&#10;   - Implemented a Builder pattern for flexible instance creation, allowing configuration of parameters like baudRate, dataBits, stopBits, parity, retryDelay, readDelay, and maxFailureCount.&#10;&#10;7. Helper Method for Port Discovery:&#10;   - Added a getPorts() method in a companion object to list all available serial ports, simplifying the process of selecting a port.&#10;&#10;8. Connection Verification:&#10;   - Added an ensureConnected() method that verifies and re-establishes the connection before every read/write operation to prevent attempts on a disconnected port.&#10;&#10;9. Documentation and Comments:&#10;   - Added detailed comments and documentation throughout the code, enhancing readability, maintainability, and usability.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KSerial/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/KSerial/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KSerial/src/main/kotlin/IKSerial.kt" beforeDir="false" afterPath="$PROJECT_DIR$/KSerial/src/main/kotlin/IKSerial.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KSerial/src/main/kotlin/KSerial.kt" beforeDir="false" afterPath="$PROJECT_DIR$/KSerial/src/main/kotlin/KSerial.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -95,6 +93,9 @@
   <component name="KotlinCodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
+  <component name="KotlinScriptingSettings">
+    <option name="suppressDefinitionsCheck" value="true" />
+  </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -142,6 +143,10 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.5344828",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -297,7 +302,7 @@
       <workItem from="1730528057179" duration="62000" />
       <workItem from="1730700524078" duration="616000" />
       <workItem from="1730714097835" duration="6866000" />
-      <workItem from="1731142366757" duration="840000" />
+      <workItem from="1731142366757" duration="1210000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -371,7 +376,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730721625987</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Changelog for KSerial Class&#10;&#10;Version 2.0.0&#10;&#10;1. Auto-Reconnection:&#10;   - Added automatic reconnection with a configurable retry delay. This ensures the connection is re-established if lost, enhancing reliability in unstable environments.&#10;&#10;2. Connection Status Flow:&#10;   - Integrated StateFlow to broadcast real-time connection status, enabling subscribers to react to changes in connection.&#10;&#10;3. Concurrency Safety:&#10;   - Incorporated a Mutex (named communication) to ensure thread-safe access during read and write operations, protecting against concurrency issues.&#10;&#10;4. Failure Handling &amp; Retry Logic:&#10;   - Introduced a configurable maxFailureCount to automatically disconnect after a series of consecutive failures, preventing potential deadlocks.&#10;   - Added a responseFailureCounter to track failures, with an automatic reset upon successful operation.&#10;   - Improved error handling by disconnecting and resetting the connection if the maximum failure threshold is reached.&#10;&#10;5. Enhanced Logging:&#10;   - Expanded logging to provide detailed information about connection status, data transmission, and errors, aiding in debugging and traceability.&#10;&#10;6. Builder Pattern:&#10;   - Implemented a Builder pattern for flexible instance creation, allowing configuration of parameters like baudRate, dataBits, stopBits, parity, retryDelay, readDelay, and maxFailureCount.&#10;&#10;7. Helper Method for Port Discovery:&#10;   - Added a getPorts() method in a companion object to list all available serial ports, simplifying the process of selecting a port.&#10;&#10;8. Connection Verification:&#10;   - Added an ensureConnected() method that verifies and re-establishes the connection before every read/write operation to prevent attempts on a disconnected port.&#10;&#10;9. Documentation and Comments:&#10;   - Added detailed comments and documentation throughout the code, enhancing readability, maintainability, and usability.">
+      <option name="closed" value="true" />
+      <created>1731143244396</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1731143244396</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -394,6 +407,7 @@
     <MESSAGE value="v1.0.1" />
     <MESSAGE value="v1.0.2" />
     <MESSAGE value="v1.0.4" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1.0.4" />
+    <MESSAGE value="Changelog for KSerial Class&#10;&#10;Version 2.0.0&#10;&#10;1. Auto-Reconnection:&#10;   - Added automatic reconnection with a configurable retry delay. This ensures the connection is re-established if lost, enhancing reliability in unstable environments.&#10;&#10;2. Connection Status Flow:&#10;   - Integrated StateFlow to broadcast real-time connection status, enabling subscribers to react to changes in connection.&#10;&#10;3. Concurrency Safety:&#10;   - Incorporated a Mutex (named communication) to ensure thread-safe access during read and write operations, protecting against concurrency issues.&#10;&#10;4. Failure Handling &amp; Retry Logic:&#10;   - Introduced a configurable maxFailureCount to automatically disconnect after a series of consecutive failures, preventing potential deadlocks.&#10;   - Added a responseFailureCounter to track failures, with an automatic reset upon successful operation.&#10;   - Improved error handling by disconnecting and resetting the connection if the maximum failure threshold is reached.&#10;&#10;5. Enhanced Logging:&#10;   - Expanded logging to provide detailed information about connection status, data transmission, and errors, aiding in debugging and traceability.&#10;&#10;6. Builder Pattern:&#10;   - Implemented a Builder pattern for flexible instance creation, allowing configuration of parameters like baudRate, dataBits, stopBits, parity, retryDelay, readDelay, and maxFailureCount.&#10;&#10;7. Helper Method for Port Discovery:&#10;   - Added a getPorts() method in a companion object to list all available serial ports, simplifying the process of selecting a port.&#10;&#10;8. Connection Verification:&#10;   - Added an ensureConnected() method that verifies and re-establishes the connection before every read/write operation to prevent attempts on a disconnected port.&#10;&#10;9. Documentation and Comments:&#10;   - Added detailed comments and documentation throughout the code, enhancing readability, maintainability, and usability." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changelog for KSerial Class&#10;&#10;Version 2.0.0&#10;&#10;1. Auto-Reconnection:&#10;   - Added automatic reconnection with a configurable retry delay. This ensures the connection is re-established if lost, enhancing reliability in unstable environments.&#10;&#10;2. Connection Status Flow:&#10;   - Integrated StateFlow to broadcast real-time connection status, enabling subscribers to react to changes in connection.&#10;&#10;3. Concurrency Safety:&#10;   - Incorporated a Mutex (named communication) to ensure thread-safe access during read and write operations, protecting against concurrency issues.&#10;&#10;4. Failure Handling &amp; Retry Logic:&#10;   - Introduced a configurable maxFailureCount to automatically disconnect after a series of consecutive failures, preventing potential deadlocks.&#10;   - Added a responseFailureCounter to track failures, with an automatic reset upon successful operation.&#10;   - Improved error handling by disconnecting and resetting the connection if the maximum failure threshold is reached.&#10;&#10;5. Enhanced Logging:&#10;   - Expanded logging to provide detailed information about connection status, data transmission, and errors, aiding in debugging and traceability.&#10;&#10;6. Builder Pattern:&#10;   - Implemented a Builder pattern for flexible instance creation, allowing configuration of parameters like baudRate, dataBits, stopBits, parity, retryDelay, readDelay, and maxFailureCount.&#10;&#10;7. Helper Method for Port Discovery:&#10;   - Added a getPorts() method in a companion object to list all available serial ports, simplifying the process of selecting a port.&#10;&#10;8. Connection Verification:&#10;   - Added an ensureConnected() method that verifies and re-establishes the connection before every read/write operation to prevent attempts on a disconnected port.&#10;&#10;9. Documentation and Comments:&#10;   - Added detailed comments and documentation throughout the code, enhancing readability, maintainability, and usability." />
   </component>
 </project>

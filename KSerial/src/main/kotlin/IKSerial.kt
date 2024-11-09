@@ -46,7 +46,7 @@ interface IKSerial {
      *
      * @return The string data read from the serial port.
      */
-    suspend fun readString(): String
+    suspend fun readString(): String?
 
     /**
      * Reads a byte array from the connected serial port.
@@ -55,7 +55,7 @@ interface IKSerial {
      *
      * @return The byte array data read from the serial port.
      */
-    suspend fun readBytes(): ByteArray
+    suspend fun readBytes(): ByteArray?
 
     /**
      * Sends a string request to the serial device and awaits a string response.
